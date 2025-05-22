@@ -1,29 +1,23 @@
 using UnityEngine;
  
- public class Movement : MonoBehaviour
- {
-     public float moveSpeed = 10f;
+public class Movement : MonoBehaviour
+{
+    public float moveSpeed = 5f;
      
-     private void Update()
-     {
-         if (Input.GetKey(KeyCode.W)) // 앞으로 가는 기능
-         {
-             transform.position += Vector3.forward * moveSpeed * Time.deltaTime;
-         }
+    void Update()
+    {
+        /// Input System (Old - Legacy)
+        /// 입력값에 대한 약속된 시스템
+        /// 이동 -> WASD, 화살표키보드
+        /// 점프 -> Space
+        /// 총쏘기 -> 마우스 왼쪽
          
-         if (Input.GetKey(KeyCode.S)) // 뒤로 가는 기능
-         {
-             transform.position += Vector3.back * moveSpeed * Time.deltaTime;
-         }
+        float h = Input.GetAxis("Horizontal");
+        float v = Input.GetAxis("Vertical");
          
-         if (Input.GetKey(KeyCode.A)) // 왼쪽으로 가는 기능
-         {
-             transform.position += Vector3.left * moveSpeed * Time.deltaTime;
-         }
+        Vector3 dir = new Vector3(h, 0, v);
+        Debug.Log($"현재 입력 : {dir}");
          
-         if (Input.GetKey(KeyCode.D)) // 오른쪽으로 가는 기능
-         {
-             transform.position += Vector3.right * moveSpeed * Time.deltaTime;
-         }
-     }
- }
+        transform.position += dir * moveSpeed * Time.deltaTime;
+    }
+}
